@@ -1,5 +1,5 @@
 
-package tests;
+package test;
 
 import static org.apache.http.HttpStatus.SC_CONFLICT;
 import date.CourierTest;

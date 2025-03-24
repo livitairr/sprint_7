@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import date.CourierTest;
 import io.qameta.allure.Description;

@@ -1,6 +1,5 @@
-package tests;
+package test;
 
-import date.OrderTest;
 import date.OrderTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

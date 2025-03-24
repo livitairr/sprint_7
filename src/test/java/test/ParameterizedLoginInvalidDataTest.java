@@ -1,5 +1,5 @@
 
-package tests;
+package test;
 
 import io.qameta.allure.Description;
 import date.CourierTest;
