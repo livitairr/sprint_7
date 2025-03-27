@@ -5,7 +5,7 @@ import models.CourierModel;
 import java.util.Arrays;
 import java.util.List;
 
-public class CourierTest {
+public class CourierTestDate {
 
     // Основной URL API
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";

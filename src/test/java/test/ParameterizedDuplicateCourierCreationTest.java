@@ -2,7 +2,7 @@
 package test;
 
 import static org.apache.http.HttpStatus.SC_CONFLICT;
-import date.CourierTest;
+import date.CourierTestDate;
 import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -30,20 +30,20 @@ public class ParameterizedDuplicateCourierCreationTest {
 
     @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<CourierModel> testData() {
-        return CourierTest.getDuplicateLoginCouriers(); // Получение тестовых данных
+        return CourierTestDate.getDuplicateLoginCouriers(); // Получение тестовых данных
     }
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = CourierTest.BASE_URL; // Установка базового URL
+        RestAssured.baseURI = CourierTestDate.BASE_URL; // Установка базового URL
         courierSteps = new CourierSteps(); // Инициализация шагов для работы с курьерами
-        CourierModel courier = CourierTest.getValidCourier(); // Получение валидного курьера
+        CourierModel courier = CourierTestDate.getValidCourier(); // Получение валидного курьера
         courierSteps.createCourier(courier); // Создание курьера перед тестами
     }
 
     @Test
     @Description("Проверка невозможности создания курьера с дублирующим логином.")
-    public void validateDuplicateLogin() {
+    public void validateDuplicateLoginTest() {
         courierSteps.createCourier(duplicateCourier)
                 .then()
                 .log().all()
@@ -54,7 +54,7 @@ public class ParameterizedDuplicateCourierCreationTest {
     @After
     public void tearDown() {
         // Удаление курьера после теста
-        CourierModel loginCourier = CourierTest.getValidLoginBody();
+        CourierModel loginCourier = CourierTestDate.getValidLoginBody();
         Response loginResponse = CourierSteps.loginCourier(loginCourier);
         Integer courierId = courierSteps.getCourierId(loginResponse);
         courierSteps.deleteCourier(courierId);

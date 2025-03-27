@@ -1,7 +1,8 @@
 package test;
 
+import date.RestAssuredConfig;
 import io.qameta.allure.Description;
-import date.OrderTest;
+import date.OrderTestDate;
 import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -30,18 +31,18 @@ public class ParameterizedOrderDifferentColorsCreationTest {
 
     @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<OrderModel> testData() {
-        return OrderTest.getOrdersWithOptionalColors(); // Получение тестовых данных
+        return OrderTestDate.getOrdersWithOptionalColors(); // Получение тестовых данных
     }
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = OrderTest.BASE_URL; // Установка базового URL
+        RestAssuredConfig.setBaseURL(); // Устанавливаем базовый URL через RestAssuredConfig
         orderSteps = new OrderSteps(); // Инициализация шагов для работы с заказами
     }
 
     @Test
     @Description("Проверка создания заказов с разными цветами.")
-    public void shouldCreateOrderWithDifferentColors() {
+    public void shouldCreateOrderWithDifferentColorsTest() {
         Response response = orderSteps.createOrder(order); // Создание заказа
         response.then()
                 .log().all()

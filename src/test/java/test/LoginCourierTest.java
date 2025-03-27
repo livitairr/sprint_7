@@ -1,6 +1,6 @@
 package test;
 
-import date.CourierTest;
+import date.CourierTestDate;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
@@ -24,9 +24,9 @@ public class LoginCourierTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = CourierTest.BASE_URL; // Установка базового URL
+        RestAssured.baseURI = CourierTestDate.BASE_URL; // Установка базового URL
         courierSteps = new CourierSteps(); // Инициализация шагов для работы с курьерами
-        courier = CourierTest.getValidCourier(); // Получение валидного курьера
+        courier = CourierTestDate.getValidCourier(); // Получение валидного курьера
         courierSteps.createCourier(courier); // Создание курьера перед тестами
     }
 
@@ -44,7 +44,7 @@ public class LoginCourierTest {
     @DisplayName("При входе под несуществующим пользователем запрос возвращает ошибку.")
     @Description("Проверка ошибки при авторизации с несуществующими данными.")
     public void courierCanNotLoginWithoutRegistration() {
-        CourierModel notRegisteredCourier = CourierTest.getCourierWithInvalidLogin();
+        CourierModel notRegisteredCourier = CourierTestDate.getCourierWithInvalidLogin();
         CourierSteps.loginCourier(notRegisteredCourier)
                 .then()
                 .statusCode(SC_NOT_FOUND)
@@ -54,8 +54,8 @@ public class LoginCourierTest {
     @Test
     @DisplayName("При входе с неверным паролем запрос возвращает ошибку")
     @Description("Проверка ошибки при авторизации с неверным паролем.")
-    public void courierCanNotLoginWithInvalidPassword() {
-        CourierModel courierWithInvalidPassword = CourierTest.getCourierWithInvalidPassword(); // Получение курьера с невалидным паролем
+    public void courierCanNotLoginWithInvalidPasswordTest() {
+        CourierModel courierWithInvalidPassword = CourierTestDate.getCourierWithInvalidPassword(); // Получение курьера с невалидным паролем
         CourierSteps.loginCourier(courierWithInvalidPassword)
                 .then()
                 .statusCode(SC_NOT_FOUND)
@@ -65,7 +65,7 @@ public class LoginCourierTest {
     // Удаление курьера после выполнения теста
     @After
     public void tearDown() {
-        CourierModel loginCourier = CourierTest.getValidLoginBody();
+        CourierModel loginCourier = CourierTestDate.getValidLoginBody();
         Response loginResponse = CourierSteps.loginCourier(loginCourier);
         Integer courierId = courierSteps.getCourierId(loginResponse);
         courierSteps.deleteCourier(courierId);

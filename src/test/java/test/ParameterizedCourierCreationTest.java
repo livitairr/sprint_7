@@ -1,7 +1,7 @@
 
 package test;
 
-import date.CourierTest;
+import date.CourierTestDate;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
@@ -33,20 +33,20 @@ public class ParameterizedCourierCreationTest {
     public static Collection<CourierModel> testData() {
         // Генерация тестовых данных
         List<CourierModel> testData = new ArrayList<>();
-        testData.addAll(CourierTest.getInvalidCourierBodies()); // Невалидные данные
-        testData.addAll(CourierTest.getMissingRequiredFields()); // Отсутствующие обязательные поля
+        testData.addAll(CourierTestDate.getInvalidCourierBodies()); // Невалидные данные
+        testData.addAll(CourierTestDate.getMissingRequiredFields()); // Отсутствующие обязательные поля
         return testData;
     }
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = CourierTest.BASE_URL; // Установка базового URL
+        RestAssured.baseURI = CourierTestDate.BASE_URL; // Установка базового URL
         courierSteps = new CourierSteps(); // Инициализация шагов для работы с курьерами
     }
 
     @Test
     @Description("Проверка создания курьера с различными комбинациями обязательных полей.")
-    public void validateCourierFields() {
+    public void validateCourierFieldTest() {
         Response response = courierSteps.createCourier(courier); // Создание курьера
         response.then()
                 .log().all()

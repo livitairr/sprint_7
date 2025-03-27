@@ -1,6 +1,7 @@
 package test;
 
-import date.OrderTest;
+import date.OrderTestDate;
+import date.RestAssuredConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
@@ -19,7 +20,7 @@ public class GetOrderListTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = OrderTest.BASE_URL; // Установка базового URL
+        RestAssuredConfig.setBaseURL(); // Устанавливаем базовый URL через RestAssuredConfig
         orderSteps = new OrderSteps(); // Инициализация шагов для работы с заказами
     }
 
@@ -27,7 +28,7 @@ public class GetOrderListTest {
     @DisplayName("Проверка получения списка заказов")
     @Description("Проверка, что ответ содержит корректный список заказов. " +
             "Ожидается, что поле, содержащее заказы, присутствует и содержит данные в правильном формате.")
-    public void getOrdersList() {
+    public void getOrdersListTest() {
         orderSteps.getOrdersList()
                 .then()
                 .statusCode(SC_OK)

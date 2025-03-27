@@ -5,10 +5,13 @@ import models.OrderModel;
 import java.util.Arrays;
 import java.util.List;
 
-public class OrderTest {
+public class OrderTestDate {
 
-    // Основной URL API для заказов
-    public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/api/v1";
+    // Настроим RestAssured для использования базового URL
+    static {
+        RestAssuredConfig.setBaseURL(); // Устанавливаем базовый URL
+    }
+
 
     // Основные данные для заказа
     public static final String FIRST_NAME = "Рукия";
